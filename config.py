@@ -1,8 +1,12 @@
 import os
-from dotenv import load_dotenv
 
-# Cargar variables de entorno
-load_dotenv()
+# Cargar variables de entorno de forma segura
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    # Si dotenv no está disponible, continuar sin él
+    pass
 
 # Configuración de MongoDB con parámetros compatibles para Render
 MONGO_URI = os.getenv('MONGO_URI', 'mongodb+srv://Siempre_Frida:Enzo430093@cluster0.zcyyx9n.mongodb.net/siemprefrida?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true')
