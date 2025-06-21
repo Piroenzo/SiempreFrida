@@ -29,6 +29,15 @@ app.config['MAIL_SUPPRESS_SEND'] = MAIL_SUPPRESS_SEND
 app.config['MAIL_TIMEOUT'] = 30
 app.config['MAIL_USE_SSL'] = False
 
+# Configuración adicional para MongoDB
+app.config['MONGO_CONNECT'] = False  # Evita conexiones automáticas
+app.config['MONGO_MAX_POOL_SIZE'] = 10
+app.config['MONGO_MIN_POOL_SIZE'] = 1
+app.config['MONGO_MAX_IDLE_TIME_MS'] = 30000
+app.config['MONGO_SERVER_SELECTION_TIMEOUT_MS'] = 30000
+app.config['MONGO_SOCKET_TIMEOUT_MS'] = 30000
+app.config['MONGO_CONNECT_TIMEOUT_MS'] = 30000
+
 mongo = PyMongo(app)
 mail = Mail(app)
 
