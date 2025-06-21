@@ -1,0 +1,26 @@
+import os
+from dotenv import load_dotenv
+
+# Cargar variables de entorno
+load_dotenv()
+
+# Configuración de MongoDB
+MONGO_URI = os.getenv('MONGO_URI', 'mongodb+srv://Siempre_Frida:Enzo430093@cluster0.zcyyx9n.mongodb.net/siemprefrida?retryWrites=true&w=majority')
+MONGO_DBNAME = os.getenv('MONGO_DBNAME', 'siemprefrida')
+SECRET_KEY = os.getenv('SECRET_KEY', 'siemprefrida_secret_key_2024')
+UPLOAD_FOLDER = 'static/img'
+
+# Configuración para Flask-Mail
+MAIL_SERVER = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
+MAIL_PORT = int(os.getenv('MAIL_PORT', '587'))
+MAIL_USE_TLS = os.getenv('MAIL_USE_TLS', 'True').lower() == 'true'
+MAIL_USE_SSL = os.getenv('MAIL_USE_SSL', 'False').lower() == 'true'
+MAIL_USERNAME = os.getenv('MAIL_USERNAME', 'siemprefridacases@gmail.com')
+MAIL_PASSWORD = os.getenv('MAIL_PASSWORD', 'wcui aqxg hojf sejr')
+MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER', 'siemprefridacases@gmail.com')
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'siemprefridacases@gmail.com')
+
+# Configuración adicional para mejorar la conexión
+MAIL_MAX_EMAILS = int(os.getenv('MAIL_MAX_EMAILS', '10'))
+MAIL_ASCII_ATTACHMENTS = os.getenv('MAIL_ASCII_ATTACHMENTS', 'False').lower() == 'true'
+MAIL_SUPPRESS_SEND = os.getenv('MAIL_SUPPRESS_SEND', 'False').lower() == 'true' 

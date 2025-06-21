@@ -1,0 +1,21 @@
+# Copiá este contenido y creá un archivo llamado ".env" en tu carpeta
+
+# Configuración de MongoDB
+MONGO_URI=mongodb+srv://Siempre_Frida:Enzo430093@cluster0.zcyyx9n.mongodb.net/siemprefrida?retryWrites=true&w=majority
+MONGO_DBNAME=siemprefrida
+SECRET_KEY=siemprefrida_secret_key_2024
+
+# Configuración de Email (Gmail)
+MAIL_SERVER=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USE_TLS=True
+MAIL_USE_SSL=False
+MAIL_USERNAME=siemprefridacases@gmail.com
+MAIL_PASSWORD=wcui aqxg hojf sejr
+MAIL_DEFAULT_SENDER=siemprefridacases@gmail.com
+ADMIN_EMAIL=siemprefridacases@gmail.com
+
+# Configuración adicional
+MAIL_MAX_EMAILS=10
+MAIL_ASCII_ATTACHMENTS=False
+MAIL_SUPPRESS_SEND=False 

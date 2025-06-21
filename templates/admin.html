@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - Siempre Frida</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" type="image/jpeg" href="/static/img/Icono_siemprefrida.jpg">
+    <meta property="og:image" content="/static/img/Icono_siemprefrida.jpg">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="/static/img/Icono_siemprefrida.jpg" alt="Logo Siempre Frida" class="logo-img">
+        </div>
+        <h1>Panel de Administración</h1>
+        <p>Gestión de Productos</p>
+    </header>
+
+    <nav class="navbar">
+        <a href="/" class="nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+            </svg>
+            Volver a la tienda
+        </a>
+        <a href="/admin/orders" class="nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M2 2.5A.5.5 0 0 1 2.5 2h11a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11zm1 .5v10h10V3H3zm2 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+            Ver Pedidos
+        </a>
+        <a href="/logout" class="nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                <path d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+            </svg>
+            Cerrar sesión
+        </a>
+    </nav>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flashes-container">
+                    {% for category, message in messages %}
+                        <div class="flash-message {{ category }}">
+                            {% if category == 'success' %}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                </svg>
+                            {% else %}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                                </svg>
+                            {% endif %}
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="admin-grid">
+            <section class="seccion nuevo-producto">
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                    </svg>
+                    Nuevo Producto
+                </h2>
+                <form method="POST" enctype="multipart/form-data" class="admin-form">
+                    <div class="form-group">
+                        <label for="nombre">Nombre del producto</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Ej: Cuaderno A4">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="categoria">Categoría</label>
+                        <select id="categoria" name="categoria" required>
+                            <option value="">Selecciona una categoría</option>
+                            <option value="Cuadernos">Cuadernos</option>
+                            <option value="Lápices y Bolígrafos">Lápices y Bolígrafos</option>
+                            <option value="Mochilas">Mochilas</option>
+                            <option value="Arte y Manualidades">Arte y Manualidades</option>
+                            <option value="Papelería">Papelería</option>
+                            <option value="Libros">Libros</option>
+                            <option value="Organizadores">Organizadores</option>
+                            <option value="Tecnología">Tecnología</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                        <div class="categoria-personalizada" style="display: none;">
+                            <input type="text" id="categoria-personalizada" name="categoria_personalizada" placeholder="Escribe tu categoría personalizada">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="tiene_tamanos" name="tiene_tamanos">
+                            <span class="checkmark"></span>
+                            Este producto tiene diferentes precios según el tamaño
+                        </label>
+                    </div>
+                    
+                    <div class="form-group" id="precio-simple">
+                        <label for="precio">Precio ($)</label>
+                        <input type="number" id="precio" name="precio" step="0.01" placeholder="0.00">
+                    </div>
+                    
+                    <div class="form-group" id="precios-tamanos" style="display: none;">
+                        <label>Precios por tamaño</label>
+                        <div id="tamanos-container">
+                            <div class="tamano-precio-item">
+                                <input type="text" name="tamanos[]" placeholder="Tamaño (ej: A4, Grande, etc.)" required>
+                                <input type="number" name="precios_tamanos[]" step="0.01" placeholder="Precio" required>
+                                <button type="button" class="remove-tamano-btn" onclick="removeTamano(this)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" id="agregar-tamano-btn" class="add-tamano-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                            </svg>
+                            Agregar otro tamaño
+                        </button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="descripcion">Descripción del producto</label>
+                        <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describe las características, materiales, dimensiones, etc. del producto..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imagen">Imagen del producto</label>
+                        <div class="file-input-container">
+                            <input type="file" id="imagen" name="imagen" accept="image/*" required>
+                            <div class="file-input-preview">
+                                <img id="imagen-preview" src="#" alt="Vista previa" style="display: none;">
+                                <span class="file-input-text">Arrastra una imagen o haz clic para seleccionar</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                        </svg>
+                        Agregar Producto
+                    </button>
+                </form>
+            </section>
+
+            <section class="seccion productos-list">
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                        <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                    </svg>
+                    Productos Actuales
+                </h2>
+                <div class="productos admin-productos">
+                    {% for producto in productos %}
+                    <div class="producto admin-producto">
+                        <div class="producto-imagen">
+                            <img src="/static/{{ producto.imagen }}" alt="{{ producto.nombre }}">
+                        </div>
+                        <div class="producto-info">
+                            <h3>{{ producto.nombre }}</h3>
+                            <div class="producto-categoria">
+                                <span class="categoria-badge">{{ producto.categoria or 'Sin categoría' }}</span>
+                            </div>
+                            {% if producto.tiene_tamanos and producto.precios_por_tamano %}
+                                <div class="producto-precios-admin">
+                                    <span class="precio-label">Precios por tamaño:</span>
+                                    <div class="precios-tamanos-list">
+                                        {% for tamano, precio in producto.precios_por_tamano.items() %}
+                                        <span class="precio-tamano-item">{{ tamano }}: ${{ precio }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <span class="precio">${{ producto.precio }}</span>
+                            {% endif %}
+                            <div class="admin-producto-acciones">
+                                <a href="{{ url_for('edit_product', product_id=producto._id) }}" class="edit-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                    </svg>
+                                    Editar
+                                </a>
+                                <form method="get" action="/admin" class="delete-form">
+                                    <input type="hidden" name="eliminar" value="{{ producto._id }}">
+                                    <button type="submit" class="delete-button">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                        </svg>
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Funcionalidad para categorías
+        document.getElementById('categoria').addEventListener('change', function() {
+            const categoriaPersonalizada = document.querySelector('.categoria-personalizada');
+            const inputPersonalizada = document.getElementById('categoria-personalizada');
+            
+            if (this.value === 'Otros') {
+                categoriaPersonalizada.style.display = 'block';
+                inputPersonalizada.setAttribute('required', 'required');
+            } else {
+                categoriaPersonalizada.style.display = 'none';
+                inputPersonalizada.removeAttribute('required');
+                inputPersonalizada.value = '';
+            }
+        });
+
+        // Funcionalidad para precios por tamaño
+        document.getElementById('tiene_tamanos').addEventListener('change', function() {
+            const precioSimple = document.getElementById('precio-simple');
+            const preciosTamanos = document.getElementById('precios-tamanos');
+            const precioInput = document.getElementById('precio');
+            
+            if (this.checked) {
+                precioSimple.style.display = 'none';
+                preciosTamanos.style.display = 'block';
+                precioInput.removeAttribute('required');
+                precioInput.value = '';
+            } else {
+                precioSimple.style.display = 'block';
+                preciosTamanos.style.display = 'none';
+                precioInput.setAttribute('required', 'required');
+            }
+        });
+
+        // Agregar nuevo tamaño
+        document.getElementById('agregar-tamano-btn').addEventListener('click', function() {
+            const container = document.getElementById('tamanos-container');
+            const newItem = document.createElement('div');
+            newItem.className = 'tamano-precio-item';
+            newItem.innerHTML = `
+                <input type="text" name="tamanos[]" placeholder="Tamaño (ej: A4, Grande, etc.)" required>
+                <input type="number" name="precios_tamanos[]" step="0.01" placeholder="Precio" required>
+                <button type="button" class="remove-tamano-btn" onclick="removeTamano(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
+            `;
+            container.appendChild(newItem);
+        });
+
+        // Remover tamaño
+        function removeTamano(button) {
+            const container = document.getElementById('tamanos-container');
+            if (container.children.length > 1) {
+                button.parentElement.remove();
+            }
+        }
+
+        // Validación del formulario
+        document.querySelector('.admin-form').addEventListener('submit', function(e) {
+            const tieneTamanos = document.getElementById('tiene_tamanos').checked;
+            const precioInput = document.getElementById('precio');
+            const tamanosContainer = document.getElementById('tamanos-container');
+            
+            if (tieneTamanos) {
+                // Validar que al menos hay un tamaño con precio
+                const tamanos = tamanosContainer.querySelectorAll('input[name="tamanos[]"]');
+                const precios = tamanosContainer.querySelectorAll('input[name="precios_tamanos[]"]');
+                
+                let valid = true;
+                for (let i = 0; i < tamanos.length; i++) {
+                    if (!tamanos[i].value.trim() || !precios[i].value.trim()) {
+                        valid = false;
+                        break;
+                    }
+                }
+                
+                if (!valid) {
+                    e.preventDefault();
+                    alert('Por favor completa todos los tamaños y precios.');
+                    return;
+                }
+            } else {
+                // Validar precio simple
+                if (!precioInput.value.trim()) {
+                    e.preventDefault();
+                    alert('Por favor ingresa un precio para el producto.');
+                    return;
+                }
+            }
+        });
+
+        // Preview de imagen
+        document.getElementById('imagen').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('imagen-preview');
+            const fileText = document.querySelector('.file-input-text');
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    fileText.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Drag and drop para imágenes
+        const dropZone = document.querySelector('.file-input-container');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            dropZone.classList.add('highlight');
+        }
+
+        function unhighlight(e) {
+            dropZone.classList.remove('highlight');
+        }
+
+        dropZone.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            const fileInput = document.getElementById('imagen');
+            
+            fileInput.files = files;
+            fileInput.dispatchEvent(new Event('change'));
+        }
+    </script>
+</body>
+</html> 

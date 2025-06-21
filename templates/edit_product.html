@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto - Siempre Frida</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='img/Icono_siemprefrida.jpg') }}">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='img/Icono_siemprefrida.jpg') }}" alt="Logo Siempre Frida" class="logo-img">
+        </div>
+        <h1>Editar Producto</h1>
+    </header>
+
+    <nav class="navbar">
+        <a href="{{ url_for('admin') }}" class="nav-link">
+             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+            Volver al panel
+        </a>
+    </nav>
+
+    <main>
+        <div class="edit-container">
+            <section class="seccion">
+                <form method="POST" enctype="multipart/form-data" class="admin-form">
+                    <div class="form-group">
+                        <label for="nombre">Nombre del producto</label>
+                        <input type="text" id="nombre" name="nombre" required value="{{ producto.nombre }}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="categoria">Categoría</label>
+                        <select id="categoria" name="categoria" required>
+                            <option value="">Selecciona una categoría</option>
+                            <option value="Cuadernos" {% if producto.categoria == 'Cuadernos' %}selected{% endif %}>Cuadernos</option>
+                            <option value="Lápices y Bolígrafos" {% if producto.categoria == 'Lápices y Bolígrafos' %}selected{% endif %}>Lápices y Bolígrafos</option>
+                            <option value="Mochilas" {% if producto.categoria == 'Mochilas' %}selected{% endif %}>Mochilas</option>
+                            <option value="Arte y Manualidades" {% if producto.categoria == 'Arte y Manualidades' %}selected{% endif %}>Arte y Manualidades</option>
+                            <option value="Papelería" {% if producto.categoria == 'Papelería' %}selected{% endif %}>Papelería</option>
+                            <option value="Libros" {% if producto.categoria == 'Libros' %}selected{% endif %}>Libros</option>
+                            <option value="Organizadores" {% if producto.categoria == 'Organizadores' %}selected{% endif %}>Organizadores</option>
+                            <option value="Tecnología" {% if producto.categoria == 'Tecnología' %}selected{% endif %}>Tecnología</option>
+                            <option value="Otros" {% if producto.categoria not in ['Cuadernos', 'Lápices y Bolígrafos', 'Mochilas', 'Arte y Manualidades', 'Papelería', 'Libros', 'Organizadores', 'Tecnología'] %}selected{% endif %}>Otros</option>
+                        </select>
+                        <div class="categoria-personalizada" id="categoria-personalizada-container" {% if producto.categoria not in ['Cuadernos', 'Lápices y Bolígrafos', 'Mochilas', 'Arte y Manualidades', 'Papelería', 'Libros', 'Organizadores', 'Tecnología'] %}style="display: block;"{% endif %}>
+                            <input type="text" id="categoria-personalizada" name="categoria_personalizada" placeholder="Escribe tu categoría personalizada" value="{% if producto.categoria not in ['Cuadernos', 'Lápices y Bolígrafos', 'Mochilas', 'Arte y Manualidades', 'Papelería', 'Libros', 'Organizadores', 'Tecnología'] %}{{ producto.categoria }}{% endif %}">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="tiene_tamanos" name="tiene_tamanos" {% if producto.tiene_tamanos %}checked{% endif %}>
+                            <span class="checkmark"></span>
+                            Este producto tiene diferentes precios según el tamaño
+                        </label>
+                    </div>
+                    
+                    <div class="form-group" id="precio-simple" {% if producto.tiene_tamanos %}style="display: none;"{% endif %}>
+                        <label for="precio">Precio ($)</label>
+                        <input type="number" id="precio" name="precio" step="0.01" value="{{ producto.precio if not producto.tiene_tamanos else '' }}">
+                    </div>
+                    
+                    <div class="form-group" id="precios-tamanos" {% if not producto.tiene_tamanos %}style="display: none;"{% endif %}>
+                        <label>Precios por tamaño</label>
+                        <div id="tamanos-container">
+                            {% if producto.tiene_tamanos and producto.precios_por_tamano %}
+                                {% for tamano, precio in producto.precios_por_tamano.items() %}
+                                <div class="tamano-precio-item">
+                                    <input type="text" name="tamanos[]" placeholder="Tamaño (ej: A4, Grande, etc.)" value="{{ tamano }}" required>
+                                    <input type="number" name="precios_tamanos[]" step="0.01" placeholder="Precio" value="{{ precio }}" required>
+                                    <button type="button" class="remove-tamano-btn" onclick="removeTamano(this)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="tamano-precio-item">
+                                    <input type="text" name="tamanos[]" placeholder="Tamaño (ej: A4, Grande, etc.)" required>
+                                    <input type="number" name="precios_tamanos[]" step="0.01" placeholder="Precio" required>
+                                    <button type="button" class="remove-tamano-btn" onclick="removeTamano(this)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <button type="button" id="agregar-tamano-btn" class="add-tamano-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+                            </svg>
+                            Agregar otro tamaño
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descripcion">Descripción del producto</label>
+                        <textarea id="descripcion" name="descripcion" rows="4" placeholder="Describe las características, materiales, dimensiones, etc. del producto...">{{ producto.descripcion or '' }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imagen">Imagen del producto (opcional)</label>
+                        <p class="ayuda-texto">Sube una nueva imagen solo si quieres reemplazar la actual.</p>
+                        <div class="file-input-container">
+                             <input type="file" id="imagen" name="imagen" accept="image/*">
+                             <div class="file-input-preview">
+                                 <img id="imagen-preview" src="{{ url_for('static', filename=producto.imagen) }}" alt="Vista previa actual">
+                                 <span class="file-input-text" style="display: none;">Arrastra una imagen o haz clic para seleccionar</span>
+                             </div>
+                         </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg>
+                        Guardar Cambios
+                    </button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+    <script>
+        // Funcionalidad para categorías
+        document.getElementById('categoria').addEventListener('change', function() {
+            const categoriaPersonalizada = document.getElementById('categoria-personalizada-container');
+            const inputPersonalizada = document.getElementById('categoria-personalizada');
+            
+            if (this.value === 'Otros') {
+                categoriaPersonalizada.style.display = 'block';
+                inputPersonalizada.setAttribute('required', 'required');
+            } else {
+                categoriaPersonalizada.style.display = 'none';
+                inputPersonalizada.removeAttribute('required');
+                inputPersonalizada.value = '';
+            }
+        });
+
+        // Funcionalidad para precios por tamaño
+        document.getElementById('tiene_tamanos').addEventListener('change', function() {
+            const precioSimple = document.getElementById('precio-simple');
+            const preciosTamanos = document.getElementById('precios-tamanos');
+            const precioInput = document.getElementById('precio');
+            
+            if (this.checked) {
+                precioSimple.style.display = 'none';
+                preciosTamanos.style.display = 'block';
+                precioInput.removeAttribute('required');
+                precioInput.value = '';
+            } else {
+                precioSimple.style.display = 'block';
+                preciosTamanos.style.display = 'none';
+                precioInput.setAttribute('required', 'required');
+            }
+        });
+
+        // Agregar nuevo tamaño
+        document.getElementById('agregar-tamano-btn').addEventListener('click', function() {
+            const container = document.getElementById('tamanos-container');
+            const newItem = document.createElement('div');
+            newItem.className = 'tamano-precio-item';
+            newItem.innerHTML = `
+                <input type="text" name="tamanos[]" placeholder="Tamaño (ej: A4, Grande, etc.)" required>
+                <input type="number" name="precios_tamanos[]" step="0.01" placeholder="Precio" required>
+                <button type="button" class="remove-tamano-btn" onclick="removeTamano(this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
+            `;
+            container.appendChild(newItem);
+        });
+
+        // Remover tamaño
+        function removeTamano(button) {
+            const container = document.getElementById('tamanos-container');
+            if (container.children.length > 1) {
+                button.parentElement.remove();
+            }
+        }
+
+        // Validación del formulario
+        document.querySelector('.admin-form').addEventListener('submit', function(e) {
+            const tieneTamanos = document.getElementById('tiene_tamanos').checked;
+            const precioInput = document.getElementById('precio');
+            const tamanosContainer = document.getElementById('tamanos-container');
+            
+            if (tieneTamanos) {
+                // Validar que al menos hay un tamaño con precio
+                const tamanos = tamanosContainer.querySelectorAll('input[name="tamanos[]"]');
+                const precios = tamanosContainer.querySelectorAll('input[name="precios_tamanos[]"]');
+                
+                let valid = true;
+                for (let i = 0; i < tamanos.length; i++) {
+                    if (!tamanos[i].value.trim() || !precios[i].value.trim()) {
+                        valid = false;
+                        break;
+                    }
+                }
+                
+                if (!valid) {
+                    e.preventDefault();
+                    alert('Por favor completa todos los tamaños y precios.');
+                    return;
+                }
+            } else {
+                // Validar precio simple
+                if (!precioInput.value.trim()) {
+                    e.preventDefault();
+                    alert('Por favor ingresa un precio para el producto.');
+                    return;
+                }
+            }
+        });
+
+        // JS para preview de imagen y drag-and-drop adaptado
+        const fileInput = document.getElementById('imagen');
+        const preview = document.getElementById('imagen-preview');
+        const fileText = document.querySelector('.file-input-text');
+        const originalSrc = preview.src;
+
+        fileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    if(fileText) fileText.style.display = 'none';
+                }
+                reader.readAsDataURL(file);
+            } else {
+                 preview.src = originalSrc;
+            }
+        });
+
+        const dropZone = document.querySelector('.file-input-container');
+        if(dropZone) {
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                dropZone.addEventListener(eventName, preventDefaults, false);
+            });
+            function preventDefaults (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            ['dragenter', 'dragover'].forEach(eventName => dropZone.addEventListener(eventName, () => dropZone.classList.add('highlight'), false));
+            ['dragleave', 'drop'].forEach(eventName => dropZone.addEventListener(eventName, () => dropZone.classList.remove('highlight'), false));
+            
+            dropZone.addEventListener('drop', handleDrop, false);
+            function handleDrop(e) {
+                fileInput.files = e.dataTransfer.files;
+                fileInput.dispatchEvent(new Event('change'));
+            }
+        }
+    </script>
+</body>
+</html> 

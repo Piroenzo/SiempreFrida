@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siempre Frida - Papelería & Librería</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" type="image/jpeg" href="/static/img/Icono_siemprefrida.jpg">
+    <meta property="og:image" content="/static/img/Icono_siemprefrida.jpg">
+    <meta name="description" content="Siempre Frida - Tu papelería y librería de confianza en Buenos Aires. Encontrá todo lo que necesitás para la escuela, oficina y arte.">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero-content animate-on-scroll">
+            <div class="logo-container">
+                <img src="/static/img/Icono_siemprefrida.jpg" alt="Logo Siempre Frida" class="logo-img">
+            </div>
+            <h1 class="hero-headline">Siempre Frida</h1>
+            <p class="hero-tagline">CREAMOS MAGIA JUNTOS <br>
+                todo hecho con amor, pensado para vos! 🩷
+                </p>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <a href="#productos" class="nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
+            </svg>
+            Productos
+        </a>
+        <a href="#quienes-somos" class="nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+            </svg>
+            ¿Quiénes somos?
+        </a>
+        <a href="#contacto" class="nav-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+            </svg>
+            Contacto
+        </a>
+        <a href="#" class="nav-link cart-icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+            <span class="cart-item-count">0</span>
+        </a>
+    </nav>
+
+    <main>
+        <section class="seccion productos-section" id="productos">
+            <div class="section-header animate-on-scroll">
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
+                    </svg>
+                    Productos destacados
+                </h2>
+                <p class="section-description">Descubrí nuestra selección de productos de calidad</p>
+            </div>
+
+            <div class="search-container animate-on-scroll">
+                <form method="GET" action="{{ url_for('home') }}#productos" class="search-form">
+                    <input type="search" name="q" placeholder="Buscar productos por nombre..." value="{{ search_query or '' }}">
+                    <button type="submit">Buscar</button>
+                </form>
+            </div>
+
+            <div class="filtros-container animate-on-scroll">
+                <div class="filtro-categorias">
+                    <label for="filtro-categoria">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
+                        </svg>
+                        Filtrar por categoría
+                    </label>
+                    <select id="filtro-categoria" onchange="filtrarPorCategoria(this.value)">
+                        <option value="">🎯 Todas las categorías</option>
+                        {% for categoria in categorias %}
+                        <option value="{{ categoria }}" {% if categoria == categoria_actual %}selected{% endif %}>{{ categoria }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                {% if categoria_actual %}
+                <div class="categoria-actual">
+                    <span>Mostrando: <strong>{{ categoria_actual }}</strong></span>
+                    <a href="{{ url_for('home', q=search_query) }}#productos" class="limpiar-filtro">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                        Limpiar filtro
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="productos">
+                {% for producto in productos %}
+                <div class="producto animate-on-scroll" style="transition-delay: {{ loop.index0 * 0.05 }}s">
+                    <div class="producto-imagen">
+                        <img src="/static/{{ producto.imagen }}" alt="{{ producto.nombre }}">
+                    </div>
+                    <div class="producto-info">
+                        <h3>{{ producto.nombre }}</h3>
+                        
+                        {% if producto.tiene_tamanos and producto.precios_por_tamano %}
+                            <div class="producto-tamanos">
+                                <label for="tamano-{{ loop.index0 }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
+                                    </svg>
+                                    Selecciona tu tamaño
+                                </label>
+                                <select id="tamano-{{ loop.index0 }}" class="tamano-selector" data-product-id="{{ producto._id }}">
+                                    {% for tamano, precio in producto.precios_por_tamano.items() %}
+                                    <option value="{{ tamano }}" data-precio="{{ precio }}">{{ tamano }} - ${{ precio }}</option>
+                                    {% endfor %}
+                                </select>
+                                <div class="precio-dinamico">${{ producto.precio }}</div>
+                            </div>
+                        {% else %}
+                            <span class="precio">${{ producto.precio }}</span>
+                        {% endif %}
+                        
+                        {% if producto.descripcion %}
+                        <p class="producto-descripcion">{{ producto.descripcion }}</p>
+                        {% endif %}
+                        
+                        <button class="producto-button add-to-cart-btn" 
+                                data-product-id="{{ producto._id }}" 
+                                data-product-name="{{ producto.nombre }}" 
+                                data-product-price="{{ producto.precio }}" 
+                                data-product-image="/static/{{ producto.imagen }}"
+                                {% if producto.tiene_tamanos and producto.precios_por_tamano %}
+                                data-has-sizes="true"
+                                data-sizes="{{ producto.precios_por_tamano | tojson }}"
+                                {% endif %}>
+                            Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% if total_pages > 1 %}
+            <nav class="pagination">
+                <ul>
+                    {% if current_page > 1 %}
+                    <li><a href="{{ url_for('home', page=current_page-1, q=search_query, categoria=categoria_actual) }}#productos">« Anterior</a></li>
+                    {% endif %}
+
+                    {% for page_num in range(1, total_pages + 1) %}
+                        {% if page_num == current_page %}
+                        <li><a class="active">{{ page_num }}</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('home', page=page_num, q=search_query, categoria=categoria_actual) }}#productos">{{ page_num }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if current_page < total_pages %}
+                    <li><a href="{{ url_for('home', page=current_page+1, q=search_query, categoria=categoria_actual) }}#productos">Siguiente »</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+            
+        </section>
+
+        <div class="wave-separator animate-on-scroll">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,40 C480,120 960,0 1440,80 L1440,120 L0,120 Z" fill="currentColor"/>
+            </svg>
+        </div>
+
+        <section class="seccion about-section" id="quienes-somos">
+            <div class="section-header animate-on-scroll">
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z"/>
+                        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                    </svg>
+                    ¿Quien soy?
+                </h2>
+            </div>
+            <div class="about-content animate-on-scroll">
+                <div class="about-text">
+                    <p>¡Hola! Soy Ale 💕Desde el 2024 me dedico con mucho amor a crear papelería única, detalles que cuentan historias y convierten momentos en recuerdos 🌸✨
+                        Creo firmemente en el poder de lo hecho a mano, en la magia de personalizar, y en acompañar a otros emprendedores a brillar ✨
+                        Este emprendimiento nació con ilusión, fue creciendo con esfuerzo, y hoy es mi forma de conectar con vos 💌
+                        ¡Gracias por estar acá y ser parte de este sueño! 💖
+                        </p>
+            </div>
+        </section>
+
+        <div class="wave-separator flip animate-on-scroll">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,40 C480,120 960,0 1440,80 L1440,120 L0,120 Z" fill="currentColor"/>
+            </svg>
+        </div>
+
+        <section class="seccion contact-section" id="contacto">
+            <div class="section-header animate-on-scroll">
+                <h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                    </svg>
+                    Contacto
+                </h2>
+                <p class="section-description">¿Tenés alguna consulta? ¡Escribinos!</p>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flashes-container animate-on-scroll">
+                        {% for category, message in messages %}
+                            <div class="flash-message {{ category }}">
+                                {% if category == 'success' %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                    </svg>
+                                {% else %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                                    </svg>
+                                {% endif %}
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <div class="contact-grid animate-on-scroll">
+                <div class="contact-info">
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
+                        <h3>Gmail</h3>
+                        <p><a href="mailto:siemprefridacases@gmail.com">siemprefridacases@gmail.com</a></p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
+                        </div>
+                        <h3>WhatsApp</h3>
+                        <p><a href="https://wa.me/5491127446521" target="_blank">+54 11 2744-6521</a></p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </div>
+                        <h3>Instagram</h3>
+                        <p><a href="https://www.instagram.com/siemprefrida.creativa/" target="_blank">@siemprefrida.creativa</a></p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.84-.95-6.43-2.88-1.59-1.93-2.03-4.35-1.72-6.84.24-1.93 1.3-3.64 2.76-4.9.29-.26.6-.51.93-.76.02 2.87 0 5.74-.03 8.61.01 1.09.38 2.18 1.05 3.08.67.9 1.63 1.51 2.68 1.78.02-.32.01-.63.01-.95 0-3.32.01-6.64-.02-9.96-.01-1.29-.31-2.58-.9-3.75-.59-1.17-1.44-2.2-2.43-3.05-1.14-.94-2.5-1.54-3.89-1.79v-4.04c1.46.06 2.92.36 4.24.96.58.27 1.11.6 1.61.97.02-2.92-.01-5.84.02-8.76Z"/></svg>
+                        </div>
+                        <h3>TikTok</h3>
+                        <p><a href="https://www.tiktok.com/@siemprefrida.creativa" target="_blank">@siemprefrida.creativa</a></p>
+                    </div>
+                </div>
+
+                <form method="POST" action="{{ url_for('contact') }}" class="contact-form">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="tu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" rows="4" required placeholder="¿En qué podemos ayudarte?"></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+                        </svg>
+                        Enviar mensaje
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-new">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <img src="/static/img/Icono_siemprefrida.jpg" alt="Logo Siempre Frida" class="footer-logo">
+                    <div class="footer-brand-text">
+                        <h3>Siempre Frida</h3>
+                        <p>Tu papelería y librería de confianza</p>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Contacto</h4>
+                        <ul>
+                            <li><a href="mailto:siemprefridacases@gmail.com">siemprefridacases@gmail.com</a></li>
+                            <li><a href="https://wa.me/5491127446521" target="_blank">+54 11 2744-6521</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Redes Sociales</h4>
+                        <ul>
+                            <li><a href="https://instagram.com/siemprefrida.creativa" target="_blank">Instagram</a></li>
+                            <li><a href="https://www.tiktok.com/@siemprefrida.creativa" target="_blank">TikTok</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Información</h4>
+                        <ul>
+                            <li><a href="#productos">Productos</a></li>
+                            <li><a href="#contacto">Contacto</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; {{ year }} Siempre Frida. Todos los derechos reservados.</p>
+                </div>
+                <div class="footer-social-icons">
+                    <a href="https://instagram.com/siemprefrida.creativa" target="_blank" class="social-icon" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="white" stroke="white" stroke-width="2"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="white" stroke-width="2"/>
+                            <circle cx="17.5" cy="6.5" r="1" fill="white"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@siemprefrida.creativa" target="_blank" class="social-icon" aria-label="TikTok">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.5 2v14.5a2.5 2.5 0 1 1-2.5-2.5h.5" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <path d="M16 2c.5 2 2 4 4 4v3c-2 0-4-2-4-4V2z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <a href="https://wa.me/5491127446521" target="_blank" class="social-icon" aria-label="WhatsApp">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M16.7 13.1c-.3-.2-1.7-.8-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-.9 1.1-.2.1-.3.2-.6.1-.3-.1-1.2-.4-2.2-1.3-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.5.1-.7.1-.1.2-.3.3-.4.1-.1.1-.2.2-.4.1-.1.1-.3.1-.4 0-.1-.1-.2-.1-.3-.1-.1-.8-2-1.1-2.7-.3-.7-.6-.6-.8-.6-.2 0-.4 0-.6 0-.2.2-.8.7-.8 1.7 0 1 .7 2 1 2.2.1.2 1.9 2.9 4.6 4.1.6.2 1.1.4 1.5.5.6.2 1.1.1 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-.9.2-1 0-.1-.2-.2-.4-.3z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botón discreto para acceso del administrador SOLO en el footer -->
+        <div class="footer-admin-btn">
+            <a href="/login" class="admin-link" title="Acceso Administrador">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                </svg>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Contenedor del Carrito de Compras (oculto por defecto) -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="close-cart-btn">&times;</button>
+        </div>
+        <div class="cart-body">
+            <!-- Los productos del carrito se insertarán aquí con JS -->
+            <p class="cart-empty-message">Tu carrito está vacío.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total:</strong>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="btn-confirm-order">Confirmar Pedido</button>
+        </div>
+    </div>
+    <div class="cart-overlay"></div>
+
+    <!-- Modal para Confirmar Pedido -->
+    <div id="confirm-order-modal" class="order-modal">
+        <div class="modal-content">
+            <span class="close-modal-btn">&times;</span>
+            <h2>Completa tus datos</h2>
+            <p>Un administrador se pondrá en contacto contigo para coordinar el pago y la entrega.</p>
+            <form id="order-form">
+                <div class="form-group">
+                    <label for="customer-name">Nombre completo</label>
+                    <input type="text" id="customer-name" required placeholder="Tu nombre y apellido">
+                </div>
+                <div class="form-group">
+                    <label for="customer-contact">WhatsApp o Email de Contacto</label>
+                    <input type="text" id="customer-contact" required placeholder="Tu número o correo electrónico">
+                </div>
+                <button type="submit" class="btn-submit-order">Finalizar y Enviar Pedido</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Botón Flotante de WhatsApp -->
+    <a href="https://wa.me/5491127446521" class="whatsapp-float-button" target="_blank" aria-label="Contactar por WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+        </svg>
+    </a>
+
+    <!-- Script JavaScript mejorado para responsive design -->
+    <script src="/static/main.js"></script>
+</body>
+</html> 
