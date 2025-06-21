@@ -9,7 +9,6 @@ from config import MONGO_URI, SECRET_KEY, UPLOAD_FOLDER, MAIL_SERVER, MAIL_PORT,
 from flask_mail import Mail, Message
 import smtplib
 import ssl
-import requests
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = MONGO_URI
@@ -456,30 +455,6 @@ def test_email():
         return jsonify({'success': True, 'message': 'Conexión SMTP exitosa'})
     else:
         return jsonify({'success': False, 'message': 'Error en conexión SMTP'})
-
-@app.route('/ip-info')
-def ip_info():
-    """Endpoint temporal para obtener información de IP de Render"""
-    try:
-        # Obtener IP externa
-        response = requests.get('https://api.ipify.org?format=json')
-        external_ip = response.json()['ip']
-        
-        # Obtener IP del request
-        client_ip = request.remote_addr
-        forwarded_ip = request.headers.get('X-Forwarded-For', 'No disponible')
-        real_ip = request.headers.get('X-Real-IP', 'No disponible')
-        
-        return jsonify({
-            'external_ip': external_ip,
-            'client_ip': client_ip,
-            'forwarded_ip': forwarded_ip,
-            'real_ip': real_ip,
-            'user_agent': request.headers.get('User-Agent', 'No disponible'),
-            'headers': dict(request.headers)
-        })
-    except Exception as e:
-        return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
     # En desarrollo
