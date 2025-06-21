@@ -9,7 +9,14 @@ except ImportError:
     pass
 
 # Configuración de MongoDB con parámetros compatibles para Render
-MONGO_URI = os.getenv('MONGO_URI', 'mongodb+srv://Siempre_Frida:Enzo430093@cluster0.zcyyx9n.mongodb.net/siemprefrida?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true')
+# Para desarrollo local (funciona bien)
+MONGO_URI_LOCAL = 'mongodb+srv://Siempre_Frida:Enzo430093@cluster0.zcyyx9n.mongodb.net/siemprefrida?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true'
+
+# Para Render (con configuración SSL más permisiva)
+MONGO_URI_RENDER = 'mongodb+srv://Siempre_Frida:Enzo430093@cluster0.zcyyx9n.mongodb.net/siemprefrida?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true&ssl=true&ssl_cert_reqs=CERT_NONE&tlsInsecure=true'
+
+# Usar la URI de Render si está en producción, sino la local
+MONGO_URI = os.getenv('MONGO_URI', MONGO_URI_LOCAL)
 MONGO_DBNAME = os.getenv('MONGO_DBNAME', 'siemprefrida')
 SECRET_KEY = os.getenv('SECRET_KEY', 'siemprefrida_secret_key_2024')
 UPLOAD_FOLDER = 'static/img'
@@ -36,7 +43,7 @@ MONGO_OPTIONS = {
     'connectTimeoutMS': 30000,
     'maxPoolSize': 10,
     'minPoolSize': 1,
-    'ssl': True,
+    'ssl': False,
     'ssl_cert_reqs': 'CERT_NONE',
     'tlsAllowInvalidCertificates': True
 } 
