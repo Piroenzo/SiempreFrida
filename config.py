@@ -12,8 +12,8 @@ except ImportError:
 # Para desarrollo local (funciona bien)
 MONGO_URI_LOCAL = 'mongodb+srv://Siempre_Frida:Enzo430093@cluster0.zcyyx9n.mongodb.net/siemprefrida?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true'
 
-# Para Render (con configuración SSL más permisiva)
-MONGO_URI_RENDER = 'mongodb+srv://Siempre_Frida:Enzo430093@cluster0.zcyyx9n.mongodb.net/siemprefrida?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true&ssl=true&ssl_cert_reqs=CERT_NONE&tlsInsecure=true'
+# Para Render (URI mínima sin parámetros SSL)
+MONGO_URI_RENDER = 'mongodb+srv://Siempre_Frida:Enzo430093@cluster0.zcyyx9n.mongodb.net/siemprefrida'
 
 # Usar la URI de Render si está en producción, sino la local
 MONGO_URI = os.getenv('MONGO_URI', MONGO_URI_LOCAL)
