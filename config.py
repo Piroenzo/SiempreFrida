@@ -27,4 +27,16 @@ ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'siemprefridacases@gmail.com')
 # Configuración adicional para mejorar la conexión
 MAIL_MAX_EMAILS = int(os.getenv('MAIL_MAX_EMAILS', '10'))
 MAIL_ASCII_ATTACHMENTS = os.getenv('MAIL_ASCII_ATTACHMENTS', 'False').lower() == 'true'
-MAIL_SUPPRESS_SEND = os.getenv('MAIL_SUPPRESS_SEND', 'False').lower() == 'true' 
+MAIL_SUPPRESS_SEND = os.getenv('MAIL_SUPPRESS_SEND', 'False').lower() == 'true'
+
+# Configuración adicional para MongoDB
+MONGO_OPTIONS = {
+    'serverSelectionTimeoutMS': 30000,
+    'socketTimeoutMS': 30000,
+    'connectTimeoutMS': 30000,
+    'maxPoolSize': 10,
+    'minPoolSize': 1,
+    'ssl': True,
+    'ssl_cert_reqs': 'CERT_NONE',
+    'tlsAllowInvalidCertificates': True
+} 

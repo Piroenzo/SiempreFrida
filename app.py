@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 import os
 from bson import ObjectId
 from datetime import datetime
-from config import MONGO_URI, SECRET_KEY, UPLOAD_FOLDER, MAIL_SERVER, MAIL_PORT, MAIL_USE_TLS, MAIL_USE_SSL, MAIL_USERNAME, MAIL_PASSWORD, MAIL_DEFAULT_SENDER, ADMIN_EMAIL, MAIL_MAX_EMAILS, MAIL_ASCII_ATTACHMENTS, MAIL_SUPPRESS_SEND
+from config import MONGO_URI, SECRET_KEY, UPLOAD_FOLDER, MAIL_SERVER, MAIL_PORT, MAIL_USE_TLS, MAIL_USE_SSL, MAIL_USERNAME, MAIL_PASSWORD, MAIL_DEFAULT_SENDER, ADMIN_EMAIL, MAIL_MAX_EMAILS, MAIL_ASCII_ATTACHMENTS, MAIL_SUPPRESS_SEND, MONGO_OPTIONS
 from flask_mail import Mail, Message
 import smtplib
 import ssl
@@ -29,10 +29,9 @@ app.config['MAIL_SUPPRESS_SEND'] = MAIL_SUPPRESS_SEND
 app.config['MAIL_TIMEOUT'] = 30
 app.config['MAIL_USE_SSL'] = False
 
-# Configuración adicional para MongoDB (solo las válidas para Flask-PyMongo)
-app.config['MONGO_CONNECT'] = False  # Evita conexiones automáticas
-app.config['MONGO_MAX_POOL_SIZE'] = 10
-app.config['MONGO_MIN_POOL_SIZE'] = 1
+# Configuración adicional para MongoDB usando las opciones
+for key, value in MONGO_OPTIONS.items():
+    app.config[f'MONGO_{key.upper()}'] = value
 
 mongo = PyMongo(app)
 mail = Mail(app)
