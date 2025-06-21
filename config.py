@@ -9,7 +9,7 @@ except ImportError:
     pass
 
 # Configuración de MongoDB con parámetros compatibles para Render
-MONGO_URI = os.getenv('MONGO_URI', 'mongodb+srv://Siempre_Frida:Enzo430093@cluster0.zcyyx9n.mongodb.net/siemprefrida?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true&ssl=true&ssl_cert_reqs=CERT_NONE&tlsInsecure=true')
+MONGO_URI = os.getenv('MONGO_URI', 'mongodb+srv://Siempre_Frida:Enzo430093@cluster0.zcyyx9n.mongodb.net/siemprefrida?retryWrites=true&w=majority&tlsAllowInvalidCertificates=true')
 MONGO_DBNAME = os.getenv('MONGO_DBNAME', 'siemprefrida')
 SECRET_KEY = os.getenv('SECRET_KEY', 'siemprefrida_secret_key_2024')
 UPLOAD_FOLDER = 'static/img'
